@@ -1,13 +1,13 @@
 /*
 ** Philia:
-**    Insert refer bibliography references in a file
-**    using Sophia database.
+** Insert refer bibliography references in a file
+** using Sophia database.
 ** Usage:
-**    philia < file
+** philia < file
 ** Database is actually hardcoded
 ** Depends on sqlite3.
 ** Compilation:
-**    cc -Wall -l sqlite3 -o philia philia.c
+** cc -Wall -l sqlite3 -o philia philia.c
 */
 
 #include <stdio.h>
