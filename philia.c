@@ -67,7 +67,7 @@ searchsqlite(sqlite3 *db, char *id, long line)
 /* readfile:
 ** receive database as argument.
 ** read file and search for macros (\n.)
-** If @ macro is found, look it's first arg,
+** If @ macro is found, look its first arg,
 ** and call searchsqlite with this arg as id,
 ** the database and the line number as other arguments.
 ** Else, just print chars to stdout.
