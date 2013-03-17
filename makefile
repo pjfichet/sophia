@@ -56,7 +56,7 @@ philia: philia.o
 .man.1:
 	sed -e "s|@BINDIR@|$(BINDIR)|g" $< > $@
 
-MAN=
+MAN=sophia.1
 BIN=philia
 man: $(MAN)
 bin: $(BIN)
@@ -88,4 +88,4 @@ clean:
 
 mrproper: clean
 
-# $Id: makefile,v 0.2 2013/03/17 17:10:00 pj Exp pj $
+# $Id: makefile,v 0.3 2013/03/17 20:53:15 pj Exp pj $
