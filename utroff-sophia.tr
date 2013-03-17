@@ -1,0 +1,9 @@
+.\" sophia documentation
+.nr pdf 1
+.H1 Sophia
+.PC
+\*IMaintain a database of texts\*R
+.so rdm.sophia.tr
+.so man.sophia.tr
+.H2 BSD License
+.so lic.bsd2.tr
