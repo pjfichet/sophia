@@ -37,7 +37,7 @@ CPPFLAGS=-D_GNU_SOURCE
 LDFLAGS=
 
 # Additional libraries to link with.
-LIBS=
+LIBS=-l sqlite3
 
 
 OBJ=philia.o
@@ -88,4 +88,4 @@ clean:
 
 mrproper: clean
 
-# $Id$
+# $Id: makefile,v 0.1 2013/03/17 17:07:27 pj Exp pj $
