@@ -37,7 +37,7 @@ CPPFLAGS=-D_GNU_SOURCE
 LDFLAGS=
 
 # Additional libraries to link with.
-LIBS=-l sqlite3
+LIBS=
 
 
 OBJ=philia.o
@@ -50,7 +50,7 @@ FLAGS=$(EUC) -DLIBDIR='"$(LIBDIR)"'
 	$(CC) $(CFLAGS) $(WARN) $(FLAGS) $(CPPFLAGS) -c $<
 
 philia: philia.o
-	$(CC) $(LDFLAGS) philia.o $(LIBS) -o $@
+	$(CC) $(LDFLAGS) philia.o -l sqlite3 $(LIBS) -o $@
 
 
 .man.1:
@@ -88,4 +88,4 @@ clean:
 
 mrproper: clean
 
-# $Id: makefile,v 0.1 2013/03/17 17:07:27 pj Exp pj $
+# $Id: makefile,v 0.2 2013/03/17 17:10:00 pj Exp pj $
