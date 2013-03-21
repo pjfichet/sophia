@@ -7,20 +7,7 @@ from the database. Made to write a philosophy thesis,
 \*Isophia\*R has two aims: comparing texts, and producing
 precise references. Its companion, \*Iphilia\*R, will insert
 references from a sophia database in a text.
-.H3 Build and installation
-.PP
-Edit the makefile to suit your needs, and run
-.vS sh
-make all
-make install
-make clean
-.vE
-.H3 Uninstall
-.PP
-The makefile contain an option to uninstall:
-.vS sh
-make uninstall
-.vE
+.so build.tr
 .PP
 \*ISophia, philia\*R and their man page are distributed
 under a two clause BSD License.
