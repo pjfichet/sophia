@@ -8,6 +8,8 @@
 ** Depends on sqlite3.
 ** Compilation:
 ** cc -Wall -l sqlite3 -o philia philia.c
+**
+** $Id$
 */
 
 #include <stdio.h>
