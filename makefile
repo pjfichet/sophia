@@ -50,7 +50,7 @@ FLAGS=$(EUC) -DLIBDIR='"$(LIBDIR)"'
 	$(CC) $(CFLAGS) $(WARN) $(FLAGS) $(CPPFLAGS) -c $<
 
 philia: philia.o
-	$(CC) $(LDFLAGS) philia.o -l sqlite3 $(LIBS) -o $@
+	$(CC) $(LDFLAGS) philia.o -lsqlite3 $(LIBS) -o $@
 
 
 .man.1:
@@ -88,4 +88,4 @@ clean:
 
 mrproper: clean
 
-# $Id: makefile,v 0.3 2013/03/17 20:53:15 pj Exp pj $
+# $Id: makefile,v 0.4 2013/03/17 21:09:57 pj Exp pj $
