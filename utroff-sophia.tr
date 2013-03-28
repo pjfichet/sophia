@@ -1,8 +1,10 @@
 .\" sophia documentation
 .nr pdf 1
 .H1 Sophia
+.H* Sophia
 .PC
 \*IMaintain a database of texts\*R
+.S2
 .so rdm.sophia.tr
 .so man.sophia.tr
 .so log.sophia.tr
