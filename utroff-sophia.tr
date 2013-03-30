@@ -1,5 +1,10 @@
 .\" sophia documentation
 .nr pdf 1
+.DI $Id$
+.DA Pierre-Jean Fichet
+.DS Utroff sophia documentation
+.DT Utroff sophia
+.DK utroff sophia philia troff nroff heirloom tmac xml
 .H1 Sophia
 .H* Sophia
 .PC

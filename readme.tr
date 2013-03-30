@@ -1,3 +1,8 @@
+.DI $Id$
+.DA Pierre-Jean Fichet
+.DS Ugrind sophia readme
+.DT Utroff sophia readme
+.DK utroff sophia readme philia troff nroff heirloom tmac xml
 .H2 Sophia readme
 .H3 Presentation
 .PP

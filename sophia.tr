@@ -1,3 +1,8 @@
+.DI $Id$
+.DA Pierre-Jean Fichet
+.DS Utroff sophia manual
+.DT Utroff sophia manual
+.DK utroff sophia philia troff nroff heirloom tmac xml sqlite
 .ie \n[pdf] .H2 Sophia manual page
 .el .H2 SOPHIA
 .
