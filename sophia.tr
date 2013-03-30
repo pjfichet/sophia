@@ -1,10 +1,10 @@
-.DI $Id$
+.DI $Id: man.sophia.tr,v 1.2 2013/03/30 11:43:57 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Utroff sophia manual
 .DT Utroff sophia manual
 .DK utroff sophia philia troff nroff heirloom tmac xml sqlite
 .ie \n[pdf] .H2 Sophia manual page
-.el .H2 SOPHIA
+.el .H2 SOPHIA 1
 .
 .
 .
