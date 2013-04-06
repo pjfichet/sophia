@@ -1,4 +1,4 @@
-.DI $Id: man.sophia.tr,v 1.2 2013/03/30 11:43:57 pj Exp pj $
+.DI $Id: man.sophia.tr,v 1.3 2013/03/30 17:45:26 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Utroff sophia manual
 .DT Utroff sophia manual
@@ -212,7 +212,10 @@ Page of the text. A row of pages can be noted as p-q.
 .H3 LICENSE
 .PP
 \*ISophia\*R and this manual page are distributed under a
-two clause BSD license.
+.LP "two clause BSD"
+.LL lic.bsd2.tr
+license.
+.so so.bugs.tr
 .H3 AUTHOR
 .PP
-Pierre-Jean Fichet.
+Pierre-Jean \*CFichet\*R.
