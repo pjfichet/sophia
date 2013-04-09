@@ -1,4 +1,4 @@
-.DI $Id: rdm.sophia.tr,v 0.3 2013/03/30 11:43:57 pj Exp $
+.DI $Id: rdm.sophia.tr,v 0.4 2013/04/02 17:44:26 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Ugrind sophia readme
 .DT Utroff sophia readme
@@ -15,5 +15,7 @@ references from a sophia database in a text.
 .so so.build.tr
 .PP
 \*ISophia, philia\*R and their man page are distributed
-under a two clause BSD License.
+under a
+.LP "two clause BSD License" .
+.LL lic.bsd2.tr
 .so so.bugs.tr
