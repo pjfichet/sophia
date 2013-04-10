@@ -1,17 +1,19 @@
-.DI $Id: man.sophia.tr,v 1.3 2013/03/30 17:45:26 pj Exp pj $
+.DI $Id: man.sophia.tr,v 1.4 2013/04/06 22:05:18 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Utroff sophia manual
 .DT Utroff sophia manual
 .DK utroff sophia philia troff nroff heirloom tmac xml sqlite
-.ie \n[pdf] .H2 Sophia manual page
-.el .H2 SOPHIA 1
+.US um .H2 SOPHIA 1
+.US ! um .H3 Sophia manual
 .
 .
 .
-.H3 NAME
+.US um .H3 NAME
+.US ! um .H3 Name
 .PP
 \*ISophia\*R \(en Maintain a database of texts.
-.H3 SYNOPSIS
+.US um .H3 SYNOPSIS
+.US ! um .H3 Synopsis
 .de t
 \\*B-\\$1\\*R \\*I\\$2\\*R
 .	shift 2
@@ -34,7 +36,8 @@
 .t h headid hb hh hp
 .t t textid th ts tt tp
 ]
-.H3 DESCRIPTION 
+.US um .H3 DESCRIPTION 
+.US ! um .H3 Description
 .PP
 \*ISophia\*R maintains a database of texts: It allows to
 easyly insert, modify, search and extract information to and
@@ -68,7 +71,8 @@ be inserted, updated, searched...
 .
 .
 .
-.H3 COMMANDS
+.US um .H3 COMMANDS
+.US ! um .H3 Commands
 .ds fd \\*B-field\\*R \\*Idata\\*R [\\*B-field\\*R \
 \\*Idata\\*R...]
 .ds id \\*B-b\\*R|\\*B-h\\*R|\\*B-t\\*R \\*Iid\\*R
@@ -119,7 +123,8 @@ which is modified \*Bmust\*R be mentioned, by the options
 .
 .
 .
-.H3 FIELDS
+.US um .H3 FIELDS
+.US ! um .H3 Fields
 .PP
 The sophia database contain three tables: \*Ibooks\*R,
 \*Iheads\*R and \*Itexts\*R. Each text in the table
@@ -204,18 +209,21 @@ Page of the text. A row of pages can be noted as p-q.
 .
 .
 .
-.H3 ENVIRONMENT
+.US um .H3 ENVIRONMENT
+.US ! um .H3 Environment
 .PP
 \*BSOPHIA\*R the database.
 .
 .
-.H3 LICENSE
+.US um .H3 LICENSE
+.US ! um .H3 License
 .PP
 \*ISophia\*R and this manual page are distributed under a
 .LP "two clause BSD"
 .LL lic.bsd2.tr
 license.
 .so so.bugs.tr
-.H3 AUTHOR
+.US um .H3 AUTHOR
+.US ! um .H3 Author
 .PP
 Pierre-Jean \*CFichet\*R.
