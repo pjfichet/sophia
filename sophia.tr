@@ -1,4 +1,4 @@
-.DI $Id: man.sophia.tr,v 1.5 2013/04/10 15:36:15 pj Exp $
+.DI $Id: sophia.tr,v 1.6 2013/04/12 17:29:28 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Utroff sophia manual
 .DT Utroff sophia manual
@@ -223,7 +223,7 @@ Page of the text. A row of pages can be noted as p-q.
 .US ! ux .LL lic.bsd2.tr
 .US ux .LU @WEBURL@/man/bsd2-license.html
 license.
-.so so.bugs.tr
+.so ../doc/bugs.tr
 .US um .H3 AUTHOR
 .US ! um .H3 Author
 .PP
