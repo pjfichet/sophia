@@ -1,4 +1,4 @@
-.DI $Id: README.tr,v 0.6 2013/04/12 17:29:28 pj Exp pj $
+.DI $Id: readme.tr,v 0.7 2013/04/12 17:49:37 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Ugrind sophia readme
 .DT Utroff sophia readme
@@ -12,11 +12,11 @@ from the database. Made to write a philosophy thesis,
 \*Isophia\*R has two aims: comparing texts, and producing
 precise references. Its companion, \*Iphilia\*R, will insert
 references from a sophia database in a text.
-.so ../doc/build.tr
+.so ../share/build.tr
 .PP
 \*ISophia, philia\*R and their man page are distributed
 under a
 .LP "two clause BSD License" .
-.US ! ux .LL ../doc/bsd2.tr
+.US ! ux .LL ../share/bsd2.tr
 .US ux .LU @WEBURL@/man/bsd2-license.html
-.so ../doc/bugs.tr
+.so ../share/bugs.tr

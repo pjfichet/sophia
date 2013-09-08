@@ -1,6 +1,6 @@
 .\" sophia documentation
 .nr pdf 1
-.DI $Id: utroff-sophia.tr,v 0.11 2013/04/15 20:21:50 pj Exp pj $
+.DI $Id: utroff-sophia.tr,v 0.12 2013/09/01 14:19:34 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Utroff sophia documentation
 .DT Utroff sophia
@@ -9,11 +9,11 @@
 .H* Sophia
 .PC
 \*IMaintain a database of texts\*R
-.so ../doc/info.tr
+.so ../share/info.tr
 .S2
 .so readme.tr
 .so sophia.tr
 .so log.tr
-.so ../doc/bsd2.tr
+.so ../share/bsd2.tr
 .H2 Tables
 .XT
