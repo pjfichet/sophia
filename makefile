@@ -1,91 +1,24 @@
-# A BSD-compatible install command.
-INSTALL=/usr/bin/install
+WHO=sophia
+RDM=readme
+DOC=utroff-sophia
+MAN1=sophia
+LIC=bsd2
+LOG=log
+BINC=philia
+CLEAN=bsd2.tr
 
-# Packaging prefix.
-ROOT=
+include ../include.mk
 
-# PREFIX directory
-PREFIX=
+LIBS+=-lsqlite3
 
-# Where to place binaries.
-BINDIR=$(PREFIX)/bin
+.o:
+	$(CC) $(LDFLAGS) $< $(LIBS) -o $@
 
-# Where to place libraries.
-LIBDIR=$(PREFIX)/lib
+philia: philia.o 
+readme.t: ../share/build.tr ../share/bugs.tr
+sophia.t: ../share/bugs.tr
+utroff-sophia.tr: ../share/info.tr ../share/bsd2.tr readme.tr \
+sophia.tr log.tr \
+../share/build.tr ../share/bugs.tr
 
-# Where to place manual pages.
-MANDIR=$(PREFIX)/man
-
-# Binaries are stripped with this command after installation.
-STRIP=strip -s -R .comment -R .note
-
-# The C compiler.
-CC=cc
-
-# Compiler flags.
-CFLAGS=-O
-
-# C preprocessor flags.
-# Use -D_GNU_SOURCE for Linux with GNU libc.
-# Use -D_INCLUDE__STDC_A1_SOURCE for HP-UX.
-CPPFLAGS=-D_GNU_SOURCE
-
-# Warning flags for the compiler.
-#WARN=
-
-# Linker flags.
-LDFLAGS=
-
-# Additional libraries to link with.
-LIBS=
-
-
-OBJ=philia.o
-
-FLAGS=$(EUC) -DLIBDIR='"$(LIBDIR)"'
-
-.SUFFIXES: .man .1
-
-.c.o:
-	$(CC) $(CFLAGS) $(WARN) $(FLAGS) $(CPPFLAGS) -c $<
-
-philia: philia.o
-	$(CC) $(LDFLAGS) philia.o -lsqlite3 $(LIBS) -o $@
-
-
-.man.1:
-	sed -e "s|@BINDIR@|$(BINDIR)|g" $< > $@
-
-MAN=sophia.1
-BIN=philia
-man: $(MAN)
-bin: $(BIN)
-all: bin man
-
-
-
-installbin: bin
-	test -d $(ROOT)$(BINDIR) || mkdir -p $(ROOT)$(BINDIR)
-	for f in $(BIN); do \
-		$(INSTALL) -c $$f $(ROOT)$(BINDIR)/$$f; \
-		$(STRIP) $(ROOT)$(BINDIR)/$$f; \
-	done
-
-installman: man
-	test -d $(ROOT)$(MANDIR)/man1 || mkdir -p $(ROOT)$(MANDIR)/man1/
-	for f in $(MAN); do \
-		$(INSTALL) -c -m 644 $$f $(ROOT)$(MANDIR)/man1/$$f; \
-	done
-
-install: installbin installman
-
-uninstall:
-	cd $(ROOT)$(BINDIR)/ && rm -f $(BIN)
-	cd $(ROOT)$(MANDIR)/man1/ && rm -f $(MAN)
-
-clean:
-	rm -f $(OBJ) $(BIN) $(MAN)
-
-mrproper: clean
-
-# $Id: makefile,v 0.4 2013/03/17 21:09:57 pj Exp pj $
+# $Id: makefile,v 0.16 2013/09/08 19:38:46 pj Exp $
