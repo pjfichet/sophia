@@ -7,7 +7,7 @@ LOG=log
 BINC=philia
 CLEAN=bsd2.tr
 
-include ../include.mk
+include ../config.mk ../include.mk
 
 LIBS+=-lsqlite3
 
@@ -21,4 +21,4 @@ utroff-sophia.tr: ../share/info.tr ../share/bsd2.tr readme.tr \
 sophia.tr log.tr \
 ../share/build.tr ../share/bugs.tr
 
-# $Id: makefile,v 0.16 2013/09/08 19:38:46 pj Exp $
+# $Id: makefile,v 0.6 2013/09/09 19:35:07 pj Exp pj $
