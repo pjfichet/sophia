@@ -1,4 +1,4 @@
-.DI $Id: readme.tr,v 0.7 2013/04/12 17:49:37 pj Exp pj $
+.DI $Id: readme.tr,v 0.8 2013/09/08 15:43:09 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Ugrind sophia readme
 .DT Utroff sophia readme
@@ -18,5 +18,5 @@ references from a sophia database in a text.
 under a
 .LP "two clause BSD License" .
 .US ! ux .LL ../share/bsd2.tr
-.US ux .LU @WEBURL@/man/bsd2-license.html
+.US ux .LU @WEBURL@/man/bsd2.html
 .so ../share/bugs.tr
