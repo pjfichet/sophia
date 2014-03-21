@@ -1,4 +1,4 @@
-.DI $Id: sophia.tr,v 1.8 2013/09/08 15:43:09 pj Exp pj $
+.DI $Id: sophia.tr,v 1.9 2013/10/30 20:23:09 pj Exp pj $
 .DA Pierre-Jean Fichet
 .DS Utroff sophia manual
 .DT Utroff sophia manual
@@ -11,114 +11,114 @@
 .US um .H3 NAME
 .US ! um .H3 Name
 .PP
-\*ISophia\*R \(en Maintain a database of texts.
+\*ISophia\*I \(en Maintain a database of texts.
 .US um .H3 SYNOPSIS
 .US ! um .H3 Synopsis
 .de t
-\\*B-\\$1\\*R \\*I\\$2\\*R
+\\*B-\\$1\\*B \\*I\\$2\\*I
 .	shift 2
 .	while \\n(.$ \{\
-\\*B-\\$1\\*R \\*Idata\\*R
+\\*B-\\$1\\*B \\*Idata\\*I
 .	shift
 .	\}
 ..
 .PP
-\*Isophia\*R [
-\*Binsert\*R |
-\*Bsearch\*R |
-\*Bedit\*R   |
-\*Bupdate\*R |
-\*Brefer\*R  |
-\*Btroff\*R  |
-\*Bprint\*R ]
+\*Isophia\*I [
+\*Binsert\*B |
+\*Bsearch\*B |
+\*Bedit\*B   |
+\*Bupdate\*B |
+\*Brefer\*B  |
+\*Btroff\*B  |
+\*Bprint\*B ]
 [
 .t b bookid ba bb bc bd be bg bh bi bj bm bn bo bq bs bt bx by bz
 .t h headid hb hh hp
 .t t textid th ts tt tp
 ]
-.US um .H3 DESCRIPTION 
+.US um .H3 DESCRIPTION
 .US ! um .H3 Description
 .PP
-\*ISophia\*R maintains a database of texts: It allows to
+\*ISophia\*I maintains a database of texts: It allows to
 easyly insert, modify, search and extract information to and
 from the database. Made to write a philosophy thesis,
-\*Isophia\*R has two aims: comparing texts, and producing
+\*Isophia\*I has two aims: comparing texts, and producing
 precise references:
 .PI "Comparing text:"
 To write a philosophy thesis, one have to compare hundreds
 of texts. This can be done by turning pages of books, but
 this is not conveniant when writing with a computer. The
-author of \*Isophia\*R found easier to write all the texts
+author of \*Isophia\*I found easier to write all the texts
 he had to work with in a database, and then find and
 compare them from the computer, just near his text editor.
 .PI "Producing precise references:"
 While inserting references in a document, the usage is to
 mention the heading in which the reference appears. This is
 not easyly done with usual bibliography software such as
-\*Irefer\*R or \*Ibibtex\*R: The heading has to be
+\*Irefer\*I or \*Ibibtex\*I: The heading has to be
 duplicated for each reference, which is fastidious and leads
-to typo errors and glitches. With \*ISophia\*R, each heading
+to typo errors and glitches. With \*ISophia\*I, each heading
 is written once, and is easyly recovered and
 automatically inserted in the text document.
 .PP
-\*ISophia\*R is just an interface to the database of texts.
+\*ISophia\*I is just an interface to the database of texts.
 To use it, the format of the database must be understood.
-The first argument of \*ISophia\*R is a \*Bcommand\*R which tell
+The first argument of \*ISophia\*I is a \*Bcommand\*B which tell
 to sophia what to do: insert, update, search... The
-following arguments of sophia correspond to the \*Bfields\*R of
-the database, and must be followed by the \*Idatas\*R that has to
+following arguments of sophia correspond to the \*Bfields\*B of
+the database, and must be followed by the \*Idatas\*I that has to
 be inserted, updated, searched...
 .
 .
 .
 .US um .H3 COMMANDS
 .US ! um .H3 Commands
-.ds fd \\*B-field\\*R \\*Idata\\*R [\\*B-field\\*R \
-\\*Idata\\*R...]
-.ds id \\*B-b\\*R|\\*B-h\\*R|\\*B-t\\*R \\*Iid\\*R
-.PI \*Bedit\*R [\*(id] [\*(fd]
+.ds fd \\*B-field\\*B \\*Idata\\*I [\\*B-field\\*B \
+\\*Idata\\*I...]
+.ds id \\*B-b\\*B|\\*B-h\\*B|\\*B-t\\*B \\*Iid\\*I
+.PI \*Bedit\*B [\*(id] [\*(fd]
 Call a text editor to edit a row of the database. If [\*(id]
 option is given, the content of the fields are extracted from
-the database. See \*BTEXT FORMAT\*R to know how to insert
+the database. See \*BTEXT FORMAT\*B to know how to insert
 information in the text editor.
-.PI \*Bhead\*R \*B-hb\*R \*Iid\*R \*B-tp\*R \*Ipage\*R
-Search the heading of the page \*Ipage\*R in the book of
-unique id \*Iid\*R. Print the unique id of the row of the
-table \*Bheads\*R where \*Bhb\*R is \*Iid\*R and where
-\*Bhp\*R is less than \*Btp\*R and is more than all the
-other \*Bhp\*R fields.
-.PI \*Binsert\*R \*(fd
-Create a new row in the database by inserting \*Idata\*R in
-field \*Bfield\*R.
-.PI \*Bprint\*R \*(fd
-Print the whole rows of the database where \*Bfield\*R contain
-\*Idata\*R.
-.PI \*Brefer\*R
-Output the \*Bbooks\*R table of the database in the
-\*Irefer\*R bibliography format.
-.PI \*Bsearch\*R \*(fd
-Search row where \*Bfield\*R contain \*Idata\*R in the
+.PI \*Bhead\*B \*B-hb\*B \*Iid\*I \*B-tp\*B \*Ipage\*I
+Search the heading of the page \*Ipage\*I in the book of
+unique id \*Iid\*I. Print the unique id of the row of the
+table \*Bheads\*B where \*Bhb\*B is \*Iid\*I and where
+\*Bhp\*B is less than \*Btp\*B and is more than all the
+other \*Bhp\*B fields.
+.PI \*Binsert\*B \*(fd
+Create a new row in the database by inserting \*Idata\*I in
+field \*Bfield\*B.
+.PI \*Bprint\*B \*(fd
+Print the whole rows of the database where \*Bfield\*B contain
+\*Idata\*I.
+.PI \*Brefer\*B
+Output the \*Bbooks\*B table of the database in the
+\*Irefer\*I bibliography format.
+.PI \*Bsearch\*B \*(fd
+Search row where \*Bfield\*B contain \*Idata\*I in the
 database, and print a summary of their content.
-.PI \*Bsophia\*R \*(fd
-Output row where \*Bfield\*R contain \*Idata\*R in the
-format of the \*Isophia\*R command line. Usefull for
+.PI \*Bsophia\*B \*(fd
+Output row where \*Bfield\*B contain \*Idata\*I in the
+format of the \*Isophia\*I command line. Usefull for
 scripting.
-.PI \*Btroff\*R \*(fd
-Print the content of row where \*Bfield\*R contain
-\*Idata\*R in a format that troff can format.
-.PI \*Bupdate\*R \*B-b\*R|\*B-h\*R|\*B-t\*R \*Iid\*R \
-\*B\-field\*R \*Idata\*R
-Update the database, by replacing the content of \*Bfield\*R
-by \*Idata\*R. The \*Bunique identifier\*R of the row
-which is modified \*Bmust\*R be mentioned, by the options
-\*B-b\*R for table \*Bbooks\*R, \*B-h\*R for table
-\*Bheads\*R, \*B-t\*R for table \*Btexts\*R.
+.PI \*Btroff\*B \*(fd
+Print the content of row where \*Bfield\*B contain
+\*Idata\*I in a format that troff can format.
+.PI \*Bupdate\*B \*B-b\*B|\*B-h\*B|\*B-t\*B \*Iid\*I \
+\*B\-field\*B \*Idata\*I
+Update the database, by replacing the content of \*Bfield\*B
+by \*Idata\*I. The \*Bunique identifier\*B of the row
+which is modified \*Bmust\*B be mentioned, by the options
+\*B-b\*B for table \*Bbooks\*B, \*B-h\*B for table
+\*Bheads\*B, \*B-t\*B for table \*Btexts\*B.
 .
 .
 .
 .de field
-.	PI \\*B\\$1\\*R
-(field \\*B%\\$2\\*R of refer bibliography)
+.	PI \\*B\\$1\\*B
+(field \\*B%\\$2\\*B of refer bibliography)
 ..
 .
 .
@@ -126,17 +126,17 @@ which is modified \*Bmust\*R be mentioned, by the options
 .US um .H3 FIELDS
 .US ! um .H3 Fields
 .PP
-The sophia database contain three tables: \*Ibooks\*R,
-\*Iheads\*R and \*Itexts\*R. Each text in the table
-\*Itexts\*R is linked to a heading in the table
-\*Iheads\*R, and each heading in the table \*Iheads\*R is
-linked to a book in the table \*Ibooks\*R.
+The sophia database contain three tables: \*Ibooks\*I,
+\*Iheads\*I and \*Itexts\*I. Each text in the table
+\*Itexts\*I is linked to a heading in the table
+\*Iheads\*I, and each heading in the table \*Iheads\*I is
+linked to a book in the table \*Ibooks\*I.
 .
 .
 .H4 Table books fields
-.PI \*Bb\*R
+.PI \*Bb\*B
 Unique identifier of the row, automatically generated by
-\*Isophia\*R.
+\*Isophia\*I.
 .field ba A
 Author name and lastname.
 .field bb B
@@ -176,34 +176,34 @@ Last seen.
 .
 .
 .H4 Table heads fields
-.PI \*Bh\*R
+.PI \*Bh\*B
 Unique identifier of the row, automatically generated by
-\*Isophia\*R.
-.PI \*Bhb\*R
-Book unique identifier (link to the fiel \*Bb\*R of the
-\*Ibooks\*R table).
+\*Isophia\*I.
+.PI \*Bhb\*B
+Book unique identifier (link to the fiel \*Bb\*B of the
+\*Ibooks\*I table).
 .field hh h
 Heading title. You should enter each heading of the table of
 contents, since this is needed for your reader to find the
 exact reference in different issues.
-.PI \*Bhp\*R
-Heading page. \*ISophia\*R \*Bhead\*R option need this field
+.PI \*Bhp\*B
+Heading page. \*ISophia\*I \*Bhead\*B option need this field
 to find the heading unique id of a page of the book.
 .
 .
 .H4 Table texts fields
-.PI \*Bt\*R
+.PI \*Bt\*B
 Unique identifier of the row, automatically generated by
-\*Isophia\*R.
-.PI \*Bth\*R
-Heading unique identifier (link to the file \*Bh\*R of the
-\*Iheads\*R table).
-.PI \*Bts\*R
+\*Isophia\*I.
+.PI \*Bth\*B
+Heading unique identifier (link to the file \*Bh\*B of the
+\*Iheads\*I table).
+.PI \*Bts\*B
 Subtitle. Title that you choose for the text.
-.PI \*Btt\*R
+.PI \*Btt\*B
 Text content. The text must begin by troff paragraph macro (such
-as \*B.PP\*R, \*BPQ\*R, \*BPI\*R...), or, at least, by
-\&\*B.br\*R.
+as \*B.PP\*B, \*BPQ\*B, \*BPI\*B...), or, at least, by
+\&\*B.br\*B.
 .field tp p
 Page of the text. A row of pages can be noted as p-q.
 .
@@ -212,13 +212,13 @@ Page of the text. A row of pages can be noted as p-q.
 .US um .H3 ENVIRONMENT
 .US ! um .H3 Environment
 .PP
-\*BSOPHIA\*R the database.
+\*BSOPHIA\*B the database.
 .
 .
 .US um .H3 LICENSE
 .US ! um .H3 License
 .PP
-\*ISophia\*R and this manual page are distributed under a
+\*ISophia\*I and this manual page are distributed under a
 .LP "two clause BSD"
 .US ! ux .LL lic.bsd2.tr
 .US ux .LU @WEBURL@/man/bsd2.html
@@ -227,4 +227,4 @@ license.
 .US um .H3 AUTHOR
 .US ! um .H3 Author
 .PP
-Pierre-Jean \*CFichet\*R.
+Pierre-Jean \*CFichet\*C.
