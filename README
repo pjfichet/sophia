@@ -1,0 +1,32 @@
+Sophia
+======
+
+Sophia maintains an sqlite database of texts: it allows to
+insert, modify and search information from the database.
+Made to write my philosophy thesis, sophia has two aims:
+comparing texts, and producing precises references.
+
+Its companion, philia, will insert references from a sophia
+database in a troff document.
+
+While I used these tools to write my thesis, I am not using
+them anymore: they are not maintained, and my knowledge
+about them has diminished.
+
+
+Installation
+============
+
+Edit the makefile to fits your needs, and run:
+
+	make all
+	make install
+
+License
+=======
+
+Sophia, philia, and their manual pages are distributed
+under a two clause BSD license.
+
+
+

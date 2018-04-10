@@ -1,0 +1,302 @@
+.\"
+.\" DI $Id: sophia.tr,v 1.10 2014/03/21 09:48:19 pj Exp pj $
+.\" DA Pierre‐Jean Fichet
+.\" DS Utroff sophia manual
+.\" DT Utroff sophia manual
+.\" DK utroff sophia philia troff nroff heirloom tmac xml sqlite
+.
+.
+.
+.TH SOPHIA 1 ´2018‐04‐10´
+.
+.
+.
+.SH NAME
+.PP
+\fISophia\fR – Maintain a database of texts.
+.
+.
+.
+.SH SYNOPSIS
+.PP
+\fIsophia\fR [
+\fBinsert\fR |
+\fBsearch\fR |
+\fBedit\fR   |
+\fBupdate\fR |
+\fBrefer\fR  |
+\fBtroff\fR  |
+\fBprint\fR ]
+[
+\fB‐b\fR \fIbookid\fR
+\fB‐ba\fR \fIdata\fR
+\fB‐bb\fR \fIdata\fR
+\fB‐bc\fR \fIdata\fR
+\fB‐bd\fR \fIdata\fR
+\fB‐be\fR \fIdata\fR
+\fB‐bg\fR \fIdata\fR
+\fB‐bh\fR \fIdata\fR
+\fB‐bi\fR \fIdata\fR
+\fB‐bj\fR \fIdata\fR
+\fB‐bm\fR \fIdata\fR
+\fB‐bn\fR \fIdata\fR
+\fB‐bo\fR \fIdata\fR
+\fB‐bq\fR \fIdata\fR
+\fB‐bs\fR \fIdata\fR
+\fB‐bt\fR \fIdata\fR
+\fB‐bx\fR \fIdata\fR
+\fB‐by\fR \fIdata\fR
+\fB‐bz\fR \fIdata\fR
+\fB‐h\fR \fIheadid\fR
+\fB‐hb\fR \fIdata\fR
+\fB‐hh\fR \fIdata\fR
+\fB‐hp\fR \fIdata\fR
+\fB‐t\fR \fItextid\fR
+\fB‐th\fR \fIdata\fR
+\fB‐ts\fR \fIdata\fR
+\fB‐tt\fR \fIdata\fR
+\fB‐tp\fR \fIdata\fR
+]
+.
+.
+.
+.SH DESCRIPTION
+.PP
+\fISophia\fR maintains a database of texts: It allows to
+easyly insert, modify, search and extract information to and
+from the database. Made to write a philosophy thesis,
+\fIsophia\fR has two aims: comparing texts, and producing
+precise references:
+.TP
+\&Comparing text:
+To write a philosophy thesis, one have to compare hundreds
+of texts. This can be done by turning pages of books, but
+this is not conveniant when writing with a computer. The
+author of \fIsophia\fR found easier to write all the texts
+he had to work with in a database, and then find and
+compare them from the computer, just near his text editor.
+.TP
+\&Producing precise references:
+While inserting references in a document, the usage is to
+mention the heading in which the reference appears. This is
+not easyly done with usual bibliography software such as
+\fIrefer\fR or \fIbibtex\fR: The heading has to be
+duplicated for each reference, which is fastidious and leads
+to typo errors and glitches. With \fISophia\fR, each heading
+is written once, and is easyly recovered and
+automatically inserted in the text document.
+.PP
+\fISophia\fR is just an interface to the database of texts.
+To use it, the format of the database must be understood.
+The first argument of \fISophia\fR is a \fBcommand\fR which tell
+to sophia what to do: insert, update, search... The
+following arguments of sophia correspond to the \fBfields\fR of
+the database, and must be followed by the \fIdatas\fR that has to
+be inserted, updated, searched...
+.
+.
+.
+.SH COMMANDS
+.TP
+\&\fBedit\fR [\fB‐b\fR|\fB‐h\fR|\fB‐t\fR \fIid\fR] [\fB‐field\fR \fIdata\fR [\fB‐field\fR \fIdata\fR...]]
+Call a text editor to edit a row of the database. If [\fB‐b\fR|\fB‐h\fR|\fB‐t\fR \fIid\fR]
+option is given, the content of the fields are extracted from
+the database. See \fBTEXT FORMAT\fR to know how to insert
+information in the text editor.
+.TP
+\&\fBhead\fR \fB‐hb\fR \fIid\fR \fB‐tp\fR \fIpage\fR
+Search the heading of the page \fIpage\fR in the book of
+unique id \fIid\fR. Print the unique id of the row of the
+table \fBheads\fR where \fBhb\fR is \fIid\fR and where
+\fBhp\fR is less than \fBtp\fR and is more than all the
+other \fBhp\fR fields.
+.TP
+\&\fBinsert\fR \fB‐field\fR \fIdata\fR [\fB‐field\fR \fIdata\fR...]
+Create a new row in the database by inserting \fIdata\fR in
+field \fBfield\fR.
+.TP
+\&\fBprint\fR \fB‐field\fR \fIdata\fR [\fB‐field\fR \fIdata\fR...]
+Print the whole rows of the database where \fBfield\fR contain
+\fIdata\fR.
+.TP
+\&\fBrefer\fR
+Output the \fBbooks\fR table of the database in the
+\fIrefer\fR bibliography format.
+.TP
+\&\fBsearch\fR \fB‐field\fR \fIdata\fR [\fB‐field\fR \fIdata\fR...]
+Search row where \fBfield\fR contain \fIdata\fR in the
+database, and print a summary of their content.
+.TP
+\&\fBsophia\fR \fB‐field\fR \fIdata\fR [\fB‐field\fR \fIdata\fR...]
+Output row where \fBfield\fR contain \fIdata\fR in the
+format of the \fIsophia\fR command line. Usefull for
+scripting.
+.TP
+\&\fBtroff\fR \fB‐field\fR \fIdata\fR [\fB‐field\fR \fIdata\fR...]
+Print the content of row where \fBfield\fR contain
+\fIdata\fR in a format that troff can format.
+.TP
+\&\fBupdate\fR \fB‐b\fR|\fB‐h\fR|\fB‐t\fR \fIid\fR \fB−field\fR \fIdata\fR
+Update the database, by replacing the content of \fBfield\fR
+by \fIdata\fR. The \fBunique identifier\fR of the row
+which is modified \fBmust\fR be mentioned, by the options
+\fB‐b\fR for table \fBbooks\fR, \fB‐h\fR for table
+\fBheads\fR, \fB‐t\fR for table \fBtexts\fR.
+.
+.
+.
+.SH FIELDS
+.PP
+The sophia database contain three tables: \fIbooks\fR,
+\fIheads\fR and \fItexts\fR. Each text in the table
+\fItexts\fR is linked to a heading in the table
+\fIheads\fR, and each heading in the table \fIheads\fR is
+linked to a book in the table \fIbooks\fR.
+.
+.
+.
+.SS Table books fields
+.RS 3
+.TP
+\&\fBb\fR
+Unique identifier of the row, automatically generated by
+\fIsophia\fR.
+.TP
+\&\fBba\fR
+(field \fB%A\fR of refer bibliography)
+Author name and lastname.
+.TP
+\&\fBbb\fR
+(field \fB%B\fR of refer bibliography)
+Book title, if the reference is an article in a book.
+.TP
+\&\fBbc\fR
+(field \fB%C\fR of refer bibliography)
+City.
+.TP
+\&\fBbd\fR
+(field \fB%D\fR of refer bibliography)
+Date
+.TP
+\&\fBbe\fR
+(field \fB%E\fR of refer bibliography)
+Editor of the book.
+.TP
+\&\fBbg\fR
+(field \fB%G\fR of refer bibliography)
+.TP
+\&\fBbh\fR
+(field \fB%H\fR of refer bibliography)
+How is published the book (first edition, french
+edition...).
+.TP
+\&\fBbi\fR
+(field \fB%I\fR of refer bibliography)
+Issuer.
+.TP
+\&\fBbj\fR
+(field \fB%J\fR of refer bibliography)
+Title if this is a journal.
+.TP
+\&\fBbm\fR
+(field \fB%M\fR of refer bibliography)
+Collection.
+.TP
+\&\fBbn\fR
+(field \fB%N\fR of refer bibliography)
+Number of the journal
+.TP
+\&\fBbo\fR
+(field \fB%O\fR of refer bibliography)
+Other informations.
+.TP
+\&\fBbq\fR
+(field \fB%Q\fR of refer bibliography)
+Institution author name.
+.TP
+\&\fBbs\fR
+(field \fB%S\fR of refer bibliography)
+Serie name, if the book is part of a serie.
+.TP
+\&\fBbt\fR
+(field \fB%T\fR of refer bibliography)
+Title.
+.TP
+\&\fBbx\fR
+(field \fB%x\fR of refer bibliography)
+url.
+.TP
+\&\fBby\fR
+(field \fB%y\fR of refer bibliography)
+Last update.
+.TP
+\&\fBby\fR
+(field \fB%z\fR of refer bibliography)
+Last seen.
+.
+.
+.
+.SS Table heads fields
+.RS 3
+.TP
+\&\fBh\fR
+Unique identifier of the row, automatically generated by
+\fIsophia\fR.
+.TP
+\&\fBhb\fR
+Book unique identifier (link to the fiel \fBb\fR of the
+\fIbooks\fR table).
+.TP
+\&\fBhh\fR
+(field \fB%h\fR of refer bibliography)
+Heading title. You should enter each heading of the table of
+contents, since this is needed for your reader to find the
+exact reference in different issues.
+.TP
+\&\fBhp\fR
+Heading page. \fISophia\fR \fBhead\fR option need this field
+to find the heading unique id of a page of the book.
+.
+.
+.
+.SS Table texts fields
+.RS 3
+.TP
+\&\fBt\fR
+Unique identifier of the row, automatically generated by
+\fIsophia\fR.
+.TP
+\&\fBth\fR
+Heading unique identifier (link to the file \fBh\fR of the
+\fIheads\fR table).
+.TP
+\&\fBts\fR
+Subtitle. Title that you choose for the text.
+.TP
+\&\fBtt\fR
+Text content. The text must begin by troff paragraph macro (such
+as \fB.PP\fR, \fBPQ\fR, \fBPI\fR...), or, at least, by
+\fB.br\fR.
+.TP
+\&\fBtp\fR
+(field \fB%p\fR of refer bibliography)
+Page of the text. A row of pages can be noted as p‐q.
+.
+.
+.
+.SH ENVIRONMENT
+.PP
+\fBSOPHIA\fR the database.
+.
+.
+.
+.SH LICENSE
+.PP
+\fISophia\fR and this manual page are distributed under a
+two clause BSD license.
+.
+.
+.
+.SH AUTHOR
+.PP
+Pierre‐Jean Fichet.
