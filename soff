@@ -1,0 +1,4 @@
+#! /bin/sh
+
+# soff: nroff formated sophia output
+sophia ms -id $1 | nroff | less

@@ -22,4 +22,4 @@ utroff-sophia.tr: ../share/info.tr ../share/bsd2.tr readme.tr \
 sophia.tr log.tr \
 ../share/build.tr ../share/bugs.tr
 
-# $Id: makefile,v 0.7 2013/09/09 20:16:04 pj Exp pj $
+# $Id: makefile,v 0.8 2013/10/30 16:21:57 pj Exp pj $

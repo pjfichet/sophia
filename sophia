@@ -1,0 +1,349 @@
+#! /usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+
+# depends on: python, pysqlite, sqlite3
+import sys
+import os.path
+import sophia
+
+# optionnaly depends on psyco
+try:
+	import psyco
+	psyco.full()
+except ImportError:
+	pass
+
+class sophia_cli:
+	"""Command line interface to sophia.sophia()
+		With fancy output,
+		easy to use with troff and refer."""
+
+	def __init__(self, args):
+		"""Look at arguments to know what to do"""
+
+		# print usage if no args
+		try:
+			args[1]
+		except IndexError:
+			self.usage()
+			sys.exit(1)
+
+		# build dict {key:arg}
+		indict = {}
+		i = 2 # first argument is a command
+		db = ""
+		while i < len(args):
+			if args[i][0] == "-":
+				if args[i+1][0] != "-":
+					indict[args[i][1:]] = args[i+1]
+					i = i + 2
+				else:
+					self.usage
+			else:
+				db = args[i]
+				break
+
+		if db == "":
+			self.so = sophia.sophia()
+		else:
+			self.so = sophia.sophia(db)
+
+		
+		# look at command to know what to do
+		try:
+			if args[1] == "insert":
+				outlist = self.so.insert(indict)
+				self.list(outlist)
+			elif args[1] == "edit" or args[1] == "update":
+				outlist = self.so.edit(indict)
+				self.print(outlist)
+			elif args[1] == "search":
+				outlist = self.so.search(indict)
+				self.list(outlist)
+			elif args[1] == "print":
+				outlist = self.so.print(indict)
+				self.print(outlist)
+			elif args[1] == "sophia":
+				outlist = self.so.print(indict)
+				self.sophia(outlist)
+			elif args[1] == "vim":
+				if "id" in indict: 
+					outlist = self.so.print(indict)
+					outdict = self.vim(outlist)
+					outlist = self.so.edit(outdict)
+					self.list(outlist)
+				else:
+					outdict = self.vim([indict,])
+					outlist = self.so.insert(outdict)
+					self.list(outlist)
+			elif args[1] == "refer":
+				outlist = self.so.print({'table':'books'})
+				self.refer(outlist)
+			elif args[1] == "troff":
+				indict["table"] = "alls"
+				outlist = self.so.print(indict)
+				self.troff(outlist)
+			elif args[1] == "ms":
+				indict["table"] = "alls"
+				outlist = self.so.print(indict)
+				self.ms(outlist)
+			elif args[1] == "head":
+				indict["table"] = "heads"
+				outlist = self.so.head(indict)
+				self.print(outlist)
+				print("sophia vim -hid", outlist[0]["id"],  "-tp", indict["p"])
+			elif args[1] == "help" or args[1] == "-h" or args[1] == "--help":
+				self.usage()
+				sys.exit()
+
+			else:
+				self.usage()
+				sys.exit(1)
+		except sophia.TableError as msg:
+			sys.exit(msg)
+
+
+	def print(self, outlist):
+		"""Print an easy to read result"""
+		for outdict in outlist:
+			outdict.pop("table")
+			for key in outdict:
+				print("%" + key + " " + str(outdict[key]))
+			print()
+
+	def list(self, outlist):
+		"""Print a summary"""
+		sum_keys = {}
+		sum_keys["texts"] = ("id", "ts", "tg")
+		sum_keys["books"] = ("id", "A", "T")
+		sum_keys["heads"] = ("id", "bid", "hp", "hh")
+		sum_keys["alls"] = ("id", "A", "T", "tp", "ts")
+		string = ""
+		#for outdict in outlist:
+		#	for key in sum_keys[outdict["table"]]:
+		#		try:
+		#			string = string + str(outdict[key]) + "\t"
+		#		except KeyError:
+		#			string = string + "\t"
+		#	string = string + "\n"
+		#print(outdict["table"] + ":\n" + string)
+
+		for outdict in outlist:
+			for key in sum_keys[outdict["table"]]:
+				if key not in outdict:
+					outdict[key] = ""
+			if outdict["table"] == "texts":
+				print('{0:3d} {1:60.60s} {2:40.40s}'.format(outdict["id"],
+				outdict["ts"], outdict["tg"]))
+			elif outdict["table"] == "books":
+				print('{0:3d} {1:20.20s} {2:40.40s}'.format(outdict["id"],
+				outdict["A"], outdict["T"]))
+			elif outdict["table"] == "heads":
+				print('{0:3d} {1:3d} {2:3d} {3:60s}'.format(outdict["id"],
+				outdict["bid"], outdict["hp"], outdict["hh"]))
+			elif outdict["table"] == "alls":
+				print('{0:3d} {1:25.25s} {2:7.7s} {3:50.50s}'.format(outdict["id"],\
+				outdict["T"], outdict["tp"], outdict["ts"]))
+		#print(outlist)
+
+
+
+	def vim(self, outlist = []):
+		"""Print an easy to read result"""
+		import re
+		f = open("/tmp/sophia", "w")
+		# there is only one dict in list:
+		for key in outlist[0]:
+			f.write("%" + key + " " + str(outlist[0][key]) + "\n")
+		f.close()
+
+		os.system("vim -c 'set tw=60' -c 'set ft=groff' -c 'set spell spelllang=fr' /tmp/sophia")
+		print("")
+		f = open("/tmp/sophia", "r")
+		outdict = {}
+		void = ""
+		key = ""
+		value = ""
+		for line in f:
+			if re.match("%", line):
+				if key != "" and value != "" and value != "\n":
+					outdict[key] = value[:-1] # delete "\n"
+				void, key, value = re.split("%([^ ]*) ", line)
+			else:
+				if line != "\n":
+					value = value + line
+		f.close()
+		if key != "" and value != "" and value != "\n":
+			outdict[key] = value[:-1]
+		return outdict
+
+
+
+	def refer(self, outlist):
+		"""Output in refer format"""
+		for outdict in outlist:
+			outdict.pop("table")
+			outdict["K"] = "A" + str(outdict.pop("id")) + "A"
+			for key in outdict:
+				print("%" + key + " " + str(outdict[key]))
+			print()
+
+
+	def troff(self, outlist):
+		"""Output in troff format"""
+		select_keys = ("L", "Q", "A", "E", "S", "B", "J", "T")
+		inform_keys = ("p", "h")
+
+		for outdict in outlist:
+			outdict.pop("table")
+			try:
+				outdict["L"] = "<" + str(outdict.pop("bid")) + ">"
+				outdict["p"] = str(outdict.pop("tp"))
+				outdict["h"] = str(outdict.pop("hh"))
+			except KeyError:
+				pass
+			string = ".[ " + str(outdict["id"]) + "\n"
+			for key in select_keys:
+				if key in outdict:
+					string = string + outdict[key] + " "
+			string = string[:-1] + "\n"
+			for key in inform_keys:
+				if key in outdict:
+					string = string + "%" + key + " " + outdict[key] + "\n"
+			string = string + ".]"
+			print(string)
+
+	def ms(self, outlist):
+		"""Output in ms format"""
+		import re
+		ms_keys = ("SH", "PP")
+		refer_keys = ("A", "A2", "A3", "B", "C", "D", "E", "E2", "E3", "G",
+		"H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+		"U", "V", "w", "x", "y", "z", "h", "p")	# add specific text references
+
+		print(""".mso s.tmac
+.mso isobib-fr.tmac
+.ds U \\*{
+.ds R \\*}
+.nr HM 1v
+.ll 50n
+.pl 1000
+.po 4n
+.nr NOFN 1 .\\" do not use footnotes
+.de A>
+\\\\$3\\fB\\\\$1\\fP\\\\$2
+..
+.de CP
+\\fB[\\\\$1]\\fP
+..
+.ds croix --\\\\$1--
+""")
+
+		for outdict in outlist:
+			try:
+				outdict["L"] = "<" + str(outdict.pop("id")) + ">"
+				outdict["p"] = str(outdict.pop("tp"))
+				outdict["h"] = re.sub("\n", " \\\n", str(outdict.pop("hh")))
+				outdict["SH"] = str(outdict.pop("ts"))
+				outdict["PP"] = str(outdict.pop("tt"))
+			except KeyError:
+				pass
+
+			for key in ms_keys:
+				if key in outdict:
+					print("." + key + "\n" + outdict[key])
+
+			#print ".]<"	# bibliography macro
+			print(".ds [F 1\n.]-")
+			for key in refer_keys:
+				if key in outdict:
+					print(".ds [" + key + " " + str(outdict[key]))
+
+			#print ".nr [T 0"
+			#print ".nr [A 0"
+			print(".][ 2 book")
+			#print ".]>"	# end bibliography macro
+
+		#print(".PP\n\\&\n.pl \\n[nl]u+5v")
+		#print(".PP")
+		print(".pl \\n[nl]u+1v-\\n[fn*page-bottom-pos]u")
+		#print(".pg@bottom")
+
+
+		
+
+	def usage(self):
+		"""Print a small usage"""
+		print ("""sophia: database of texts and bibliography
+
+Usage: \
+\033[1msophia\033[0m \
+[\033[1minsert\033[0m|\033[1medit\033[0m|\033[1mvim\033[0m\
+|\033[1mrefer\033[0m|\033[1msophia\033[0m|\033[1mhead\033[0m\
+|\033[1msearch\033[0m|\033[1mtroff\033[0m|\033[1mms\033[0m] \
+[\033[1mARGS\033[0m]\033[1m \033[0m[\033[1mdatabase\033[0m]
+
+with ARGS in:
+	\033[1m-A\033[0m author
+	\033[1m-B\033[0m book
+	\033[1m-C\033[0m city
+	\033[1m-D\033[0m date
+	\033[1m-E\033[0m editor
+	\033[1m-F\033[0m (number of reference)
+	\033[1m-G\033[0m ISBN/ISSN
+	\033[1m-H\033[0m publication
+	\033[1m-I\033[0m issuer
+	\033[1m-J\033[0m journal
+	\033[1m-K\033[0m keyword
+	\033[1m-L\033[0m label
+	\033[1m-M\033[0m collection
+	\033[1m-N\033[0m journal number
+	\033[1m-O\033[0m other
+	\033[1m-o\033[0m (first occurence of citation)
+	\033[1m-P\033[0m pages of book
+	\033[1m-Q\033[0m author if author is not a person
+	\033[1m-R\033[0m report number
+	\033[1m-S\033[0m serie title
+	\033[1m-T\033[0m title
+	\033[1m-U\033[0m co-author
+	\033[1m-V\033[0m volume
+	\033[1m-w\033[0m electronic access type
+	\033[1m-X\033[0m (annotation)
+	\033[1m-x\033[0m url
+	\033[1m-y\033[0m update
+	\033[1m-z\033[0m last access
+
+	\033[1m-tg\033[0m text tag
+	\033[1m-tp\033[0m text page
+	\033[1m-tt\033[0m text text
+	\033[1m-ts\033[0m text subhead
+
+	\033[1m-hh\033[0m header
+	\033[1m-hp\033[0m page of header
+
+	\033[1m-table\033[0m books | heads | texts
+	\033[1m-bid\033[0m book id
+	\033[1m-hid\033[0m header id
+
+
+""")
+
+	def sophia(self, outlist):
+		"""Format output for sophia input"""
+		for outdict in outlist:
+			args = ""
+			print("\n\nsophia insert \\")
+			for key in outdict:
+				args = args + " -" + key + " \"" + str(outdict[key]) + "\" \\\n"
+			print(args)
+
+
+
+
+if __name__ == "__main__":
+	sophia_cli(sys.argv)
+
+# for tests
+	#import cProfile
+	#cProfile.run('sophia_cli(sys.argv)')

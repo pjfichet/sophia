@@ -9,7 +9,7 @@
 ** Compilation:
 ** cc -Wall -l sqlite3 -o philia philia.c
 **
-** $Id$
+** $Id: philia.c,v 0.4 2013/03/22 11:38:29 pj Exp pj $
 */
 
 #include <stdio.h>
